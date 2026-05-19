@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercado Fácil Pro</title>
+  <meta name="description" content="Versão web do Mercado Fácil Pro, pronta para GitHub Pages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+
+  <main id="app">
+    <section id="screen-auth" class="screen active">
+      <div class="auth-layout">
+        <div class="hero-panel">
+          <span class="badge">Mercado Fácil Pro</span>
+          <h1>Seu sistema de mercado virou um site bonito e pronto para o GitHub Pages.</h1>
+          <p>
+            Mantive a mesma proposta do projeto em Tkinter: login por perfil, catálogo moderno, carrinho,
+            histórico de pedidos e painel administrativo com gestão de produtos e pedidos.
+          </p>
+
+          <div class="feature-list">
+            <article class="feature-card dark-card">
+              <h3>Login por perfil</h3>
+              <p>Acesso separado para dono, funcionário e cliente.</p>
+            </article>
+            <article class="feature-card dark-card">
+              <h3>Catálogo elegante</h3>
+              <p>Busca, filtro por categoria, cards modernos e carrinho lateral.</p>
+            </article>
+            <article class="feature-card dark-card">
+              <h3>Pedidos organizados</h3>
+              <p>Clientes acompanham compras e a equipe administra tudo em um só lugar.</p>
+            </article>
+          </div>
+
+          <div class="credentials-card dark-card">
+            <h3>Acessos iniciais de administrador</h3>
+            <p><strong>Dono:</strong> dono / admin123</p>
+            <p><strong>Funcionário:</strong> funcionario / func123</p>
+            <small>
+              Observação: por ser uma versão para GitHub Pages, os dados ficam salvos no navegador do usuário.
+            </small>
+          </div>
+        </div>
+
+        <div class="auth-sidebar">
+          <div class="panel card">
+            <div class="section-head">
+              <h2>Entrar no sistema</h2>
+              <p>Use a mesma tela para clientes e administradores.</p>
+            </div>
+            <form id="login-form" class="form-stack">
+              <label class="field">
+                <span>Usuário</span>
+                <input id="login-usuario" type="text" autocomplete="username" />
+              </label>
+              <label class="field">
+                <span>Senha</span>
+                <input id="login-senha" type="password" autocomplete="current-password" />
+              </label>
+              <button class="btn btn-primary" type="submit">Entrar agora</button>
+            </form>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="panel card">
+            <div class="section-head">
+              <h2>Criar conta de cliente</h2>
+              <p>Clientes podem se cadastrar para comprar e acompanhar pedidos.</p>
+            </div>
+            <form id="register-form" class="form-stack">
+              <label class="field">
+                <span>Nome completo</span>
+                <input id="cad-nome" type="text" autocomplete="name" />
+              </label>
+              <label class="field">
+                <span>Usuário</span>
+                <input id="cad-usuario" type="text" autocomplete="username" />
+              </label>
+              <label class="field">
+                <span>Senha</span>
+                <input id="cad-senha" type="password" autocomplete="new-password" />
+              </label>
+              <button class="btn btn-secondary" type="submit">Criar conta</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-admin" class="screen hidden">
+      <header class="app-header">
+        <div>
+          <h1 id="admin-title">Painel administrativo</h1>
+          <p id="admin-subtitle"></p>
+        </div>
+        <div class="header-actions">
+          <button id="admin-logout" class="btn btn-danger" type="button">Sair</button>
+        </div>
+      </header>
+
+      <div id="admin-summary" class="summary-grid"></div>
+
+      <div class="admin-layout">
+        <aside class="panel card admin-form-panel">
+          <div class="section-head">
+            <h2>Cadastro de produtos</h2>
+            <p>Adicione novos itens ou atualize os já existentes.</p>
+          </div>
+
+          <form id="product-form" class="form-stack">
+            <label class="field">
+              <span>Nome do produto</span>
+              <input id="admin-nome" type="text" />
+            </label>
+            <label class="field">
+              <span>Preço</span>
+              <input id="admin-preco" type="text" inputmode="decimal" />
+            </label>
+            <label class="field">
+              <span>Categoria</span>
+              <input id="admin-categoria" type="text" />
+            </label>
+            <label class="field">
+              <span>Estoque</span>
+              <input id="admin-estoque" type="number" min="0" step="1" />
+            </label>
+            <label class="field">
+              <span>Descrição</span>
+              <textarea id="admin-descricao" rows="5"></textarea>
+            </label>
+          </form>
+
+          <div class="action-stack">
+            <button id="btn-novo-produto" class="btn btn-primary" type="button">Novo produto</button>
+            <button id="btn-atualizar-produto" class="btn btn-secondary" type="button">Atualizar selecionado</button>
+            <button id="btn-remover-produto" class="btn btn-danger" type="button">Remover selecionado</button>
+            <button id="btn-limpar-form" class="btn btn-ghost" type="button">Limpar formulário</button>
+          </div>
+        </aside>
+
+        <section class="admin-content">
+          <div class="tabs">
+            <button class="tab-btn active" data-admin-tab="products" type="button">Produtos</button>
+            <button class="tab-btn" data-admin-tab="orders" type="button">Pedidos</button>
+          </div>
+
+          <div id="admin-products-tab" class="panel card tab-panel active">
+            <div class="section-head">
+              <h2>Lista de produtos</h2>
+              <p>Selecione um item para editar os dados.</p>
+            </div>
+            <div class="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>CATEGORIA</th>
+                    <th>PREÇO</th>
+                    <th>ESTOQUE</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-products-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="admin-orders-tab" class="panel card tab-panel hidden">
+            <div class="section-head">
+              <h2>Pedidos dos clientes</h2>
+              <p>Visualize as compras finalizadas e os detalhes de cada pedido.</p>
+            </div>
+            <div class="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>CLIENTE</th>
+                    <th>USUÁRIO</th>
+                    <th>TOTAL</th>
+                    <th>STATUS</th>
+                    <th>DATA</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-body"></tbody>
+              </table>
+            </div>
+            <div class="table-actions">
+              <button id="btn-ver-itens-pedido" class="btn btn-secondary" type="button">Ver itens do pedido</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="screen-client" class="screen hidden">
+      <header class="app-header">
+        <div>
+          <h1>Área do cliente</h1>
+          <p id="client-subtitle"></p>
+        </div>
+        <div class="header-actions">
+          <button id="btn-client-orders-top" class="btn btn-secondary" type="button">Meus pedidos</button>
+          <button id="btn-client-checkout-top" class="btn btn-primary" type="button">Finalizar compra</button>
+          <button id="client-logout" class="btn btn-danger" type="button">Sair</button>
+        </div>
+      </header>
+
+      <div class="client-toolbar">
+        <div class="panel card toolbar-field grow">
+          <label class="field compact">
+            <span>Buscar produto</span>
+            <input id="client-search" type="text" placeholder="Digite para buscar..." />
+          </label>
+        </div>
+        <div class="panel card toolbar-field fixed">
+          <label class="field compact">
+            <span>Categoria</span>
+            <select id="client-category"></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="client-layout">
+        <section class="catalog-area">
+          <div id="catalog-grid" class="catalog-grid"></div>
+        </section>
+
+        <aside class="panel card cart-panel">
+          <div class="section-head">
+            <h2>Seu carrinho</h2>
+            <p>Revise os itens antes de finalizar a compra.</p>
+          </div>
+          <div id="cart-content"></div>
+          <div class="cart-actions">
+            <button id="btn-client-checkout-side" class="btn btn-primary" type="button">Finalizar compra</button>
+            <button id="btn-client-orders-side" class="btn btn-secondary" type="button">Ver meus pedidos</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
